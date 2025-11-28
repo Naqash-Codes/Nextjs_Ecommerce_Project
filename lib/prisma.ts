@@ -1,14 +1,13 @@
-// lib/prisma.ts
-import prisma from "@prisma/client";  // Prisma v7 default export
+import { PrismaClient } from "@prisma/client"
 
-// Optional: avoid multiple instances in development
-declare global {
-  // eslint-disable-next-line no-var
-  var prismaClient: typeof prisma | undefined;
+const globalForPrisma = globalThis as unknown as {
+  prisma: PrismaClient | undefined
 }
 
-export const db = global.prismaClient || prisma;
+export const prisma =
+  globalForPrisma.prisma ??
+  new PrismaClient({
+    log: ["query"],
+  })
 
-if (process.env.NODE_ENV !== "production") {
-  global.prismaClient = db;
-}
+if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma
