@@ -12,6 +12,7 @@ const Navbar = async () => {
     { name: "Home", href: "/" },
     { name: "Contact", href: "/contact" },
     { name: "About", href: "/about" },
+    { name: "Sign Up", href: "/about" },
   ];
 
   return (
@@ -26,11 +27,11 @@ const Navbar = async () => {
         ))}
       </div>
 
-      <div className="flex justify-center gap-3 items-center">
+      <div className="flex justify-center gap-6 items-center">
         <NavInput />
         <Favouritebtn />
         <Cart />
-        <ProfileButton session={session} /> {/* client component */}
+        <ProfileButton session={session} /> 
       </div>
     </nav>
   );

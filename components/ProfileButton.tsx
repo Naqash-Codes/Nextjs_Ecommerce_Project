@@ -11,12 +11,14 @@ interface ProfileButtonProps {
 export default function ProfileButton({ session }: ProfileButtonProps) {
   if (!session) {
     return (
-      <button
-        onClick={() => signIn("google")}
-        className="px-4 py-2 bg-black text-white rounded-xl"
-      >
-        Sign In
-      </button>
+      <div className="flex items-center gap-3">
+        <button
+          onClick={() => signIn("google")}
+          className="px-2 py-2 bg-black text-white rounded-xl"
+        >
+          Sign In
+        </button>
+      </div>
     );
   }
 

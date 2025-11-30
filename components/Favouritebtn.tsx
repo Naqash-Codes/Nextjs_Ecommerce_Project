@@ -4,7 +4,7 @@ import { FiHeart } from "react-icons/fi";
 const Favouritebtn = () => {
   return (
     <div>
-      <FiHeart size={20} />
+      <FiHeart size={24} />
     </div>
   )
 }
