@@ -1,11 +1,11 @@
 generator client {
-  provider   = "prisma-client"
-  engineType = "binary"
+  provider   = "prisma-client-js"
 }
 
 datasource db {
   provider = "postgresql"
 }
+
 
 model User {
   id            String    @id @default(cuid())
@@ -36,7 +36,7 @@ model Account {
 
   user User @relation(fields: [userId], references: [id])
 
-  @@index([provider, providerAccountId])
+  @@unique([provider, providerAccountId]) // ✅ NextAuth expects this
 }
 
 model Session {

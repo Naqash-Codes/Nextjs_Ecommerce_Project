@@ -3,11 +3,8 @@ import NavInput from "./NavInput";
 import Favouritebtn from "./Favouritebtn";
 import Cart from "./Cart";
 import ProfileButton from "./ProfileButton";
-import SignUpButton from "./SignUpButton";   // <-- new
-import { auth } from "@/lib/auth";
 
 const Navbar = async () => {
-  const session = await auth();
 
   const navMenu = [
     { name: "Home", href: "/" },

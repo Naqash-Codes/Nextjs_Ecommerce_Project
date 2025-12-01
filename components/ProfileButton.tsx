@@ -1,56 +1,48 @@
-// "use client";
+"use client";
 
-// import { signIn, signOut } from "next-auth/react";
-// import Image from "next/image";
-// import type { Session } from "next-auth";
-
-// interface ProfileButtonProps {
-//   session: Session | null;
-// }
-
-// export default function ProfileButton({ session }: ProfileButtonProps) {
-//   if (!session) {
-//     return (
-//       <div className="flex justify-center items-center gap-3">
-//         <button
-//           onClick={() => signIn("google")}
-//           className="w-20 px-2 py-2 bg-black text-white rounded-xl"
-//         >
-//           Sign In
-//         </button>
-//       </div>
-//     );
-//   }
-
-//   return (
-//     <div className="flex items-center gap-3">
-//       {session.user?.image && (
-//         <Image
-//           src={session.user.image}
-//           width={36}
-//           height={36}
-//           alt="Profile"
-//           className="rounded-full"
-//         />
-//       )}
-//       <button
-//         onClick={() => signOut()}
-//         className="px-3 py-2 bg-red-500 text-white rounded-xl"
-//       >
-//         Sign Out
-//       </button>
-//     </div>
-//   );
-// }
-
+import { useSession, signIn, signOut } from "next-auth/react";
+import Image from "next/image";
 import { FiUser } from "react-icons/fi";
 
 const ProfileButton = () => {
-  return (
-    <div>
-      <FiUser size={24} />
-    </div>
-  )
-}
+  const { data: session, status } = useSession();
 
-export default ProfileButton
+  // Log session info for debugging
+  console.log("ProfileButton session:", session);
+  console.log("ProfileButton status:", status);
+
+  const handleClick = () => {
+    if (session) {
+      // Sign out
+      signOut({ redirect: true, callbackUrl: "/" });
+    } else {
+      // Sign in with Google
+      signIn("google", {
+        redirect: true,
+        callbackUrl: "/",
+        prompt: "select_account", // forces account picker
+      });
+    }
+  };
+
+  return (
+    <button
+      onClick={handleClick}
+      className="flex items-center gap-2 focus:outline-none cursor-pointer"
+    >
+      {session?.user?.image ? (
+        <Image
+          src={session.user.image}
+          alt={session.user.name || "Profile"}
+          width={32}
+          height={32}
+          className="rounded-full"
+        />
+      ) : (
+        <FiUser size={28} />
+      )}
+    </button>
+  );
+};
+
+export default ProfileButton;
