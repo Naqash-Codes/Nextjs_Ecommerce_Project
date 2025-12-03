@@ -37,8 +37,8 @@ const HeroSection = () => {
               <Image
                 src="/images/apple-logo.png"
                 alt="apple"
-                width={30}
-                height={30}
+                width={50}
+                height={50}
               />
               <span>iPhone 14 Series</span>
             </div>
@@ -54,7 +54,7 @@ const HeroSection = () => {
 
           {/* RIGHT IMAGE */}
           {/* RIGHT IMAGE */}
-          <div className="relative w-full max-w-[370px] h-[380px] flex items-center justify-center">
+          <div className="relative w-full max-w-[470px] h-[380px] flex items-center justify-center -mr-9">
             <Image
               src="/images/slider-img_1.png"
               alt="iPhone"
