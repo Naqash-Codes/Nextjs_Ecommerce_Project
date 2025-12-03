@@ -7,5 +7,5 @@ export default defineConfig({
   datasource: {
     url: env("DATABASE_URL"),
   },
-  // Optionally configure migrations, outputs, etc.
+  // You can add other config like generators if needed
 });

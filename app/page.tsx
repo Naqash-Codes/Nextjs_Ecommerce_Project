@@ -1,8 +1,11 @@
+import HeroSection from '@/components/homepage/HeroSection'
 import React from 'react'
 
 const HomePage = () => {
   return (
-    <div className='flex justify-center items-center text-5xl '></div>
+    <div>
+      <HeroSection />
+    </div>
   )
 }
 

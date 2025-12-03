@@ -1,9 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
   images: {
-    domains: ["lh3.googleusercontent.com"], // <-- add this
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+      },
+      {
+        protocol: "https",
+        hostname: "avatars.githubusercontent.com", // if using GitHub login
+      },
+    ],
   },
 };
 
-module.exports = nextConfig;
+export default nextConfig;

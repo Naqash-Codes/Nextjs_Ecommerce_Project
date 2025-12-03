@@ -1,8 +1,9 @@
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { PrismaAdapter } from "@auth/prisma-adapter";
 import GoogleProvider from "next-auth/providers/google";
 import { prisma } from "./prisma";
-import { getServerSession } from "next-auth";
-import type { NextAuthOptions } from "next-auth";
+import { getServerSession, type NextAuthOptions } from "next-auth";
+import type { JWT } from "next-auth/jwt";
+import type { Session } from "next-auth";
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -17,9 +18,33 @@ export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
 
   session: {
-    strategy: "database",
+    strategy: "jwt",
   },
+
+  callbacks: {
+    // -------- JWT CALLBACK --------
+    async jwt({ token, user, account }: any) {
+      if (account && user) {
+        token.name = user.name;
+        token.email = user.email;
+        token.picture = user.image;
+      }
+      return token;
+    },
+
+    // -------- SESSION CALLBACK --------
+    async session({ session, token }: any) {
+      if (session.user) {
+        session.user.name = token.name ?? "";
+        session.user.email = token.email ?? "";
+        session.user.image = token.picture ?? "";
+      }
+      return session;
+    },
+  },
+
+  debug: true,
 };
 
-// ✅ Export a helper function to get the session anywhere (App Router)
+// Export helper
 export const auth = () => getServerSession(authOptions);
