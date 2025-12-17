@@ -1,10 +1,11 @@
+import FlashSaleSection from '@/components/homepage/FlashSaleSection'
 import HeroSection from '@/components/homepage/HeroSection'
-import React from 'react'
 
 const HomePage = () => {
   return (
     <div>
       <HeroSection />
+      <FlashSaleSection />
     </div>
   )
 }
