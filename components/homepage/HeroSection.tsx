@@ -4,7 +4,7 @@ const HeroSection = () => {
   return (
     <section className="w-full px-6 xl:px-24 flex justify-center items-center gap-4">
       {/* LEFT SIDEBAR */}
-      <div className="hidden lg:block w-1/4 bg-white border-r-2 pr-5 pt-6">
+      <div className="hidden lg:block w-1/4 bg-white border-gray-300 border-r pr-5 pt-6">
         <ul className="space-y-4 text-gray-800 text-[15px] font-medium">
           {[
             "Woman’s Fashion",
@@ -52,7 +52,6 @@ const HeroSection = () => {
             </button>
           </div>
 
-          {/* RIGHT IMAGE */}
           {/* RIGHT IMAGE */}
           <div className="relative w-full max-w-[470px] h-[380px] flex items-center justify-center -mr-9">
             <Image
