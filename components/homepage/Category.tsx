@@ -1,15 +1,11 @@
 "use client";
 
 import { useRef, useState } from "react";
-import CountdownTimer from "../Counter";
-import FlashSalesCarousel from "../FlashSaleCarousel";
 import Heading from "../Heading";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import CategoryCarousel from "../CategoryCarousel";
 
-export default function FlashSalesSection() {
-  const saleEndDate = new Date();
-  saleEndDate.setDate(saleEndDate.getDate() + 3);
-
+const Category = () => {
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
 
@@ -17,17 +13,13 @@ export default function FlashSalesSection() {
   const [isEnd, setIsEnd] = useState(false);
 
   return (
-    <section className="px-6 xl:px-24 py-10 mt-10">
-      <Heading title="Today's" />
+    <section className="px-6 xl:px-24 mt-20 mb-20">
+      <Heading title="Categories" />
 
-      {/* Title + Timer + Arrows */}
-      <div className="mt-6 flex items-center justify-between mb-6">
-        <div className="flex items-center gap-20">
-          <h2 className="text-5xl font-semibold">Flash Sales</h2>
-          <CountdownTimer targetDate={saleEndDate} />
-        </div>
+      {/* Title + Arrows */}
+      <div className="mt-6 flex items-center justify-between">
+        <h1 className="text-5xl font-semibold">Browse By Category</h1>
 
-        {/* Navigation buttons */}
         <div className="flex gap-2">
           <button
             ref={prevRef}
@@ -58,20 +50,18 @@ export default function FlashSalesSection() {
       </div>
 
       {/* Carousel */}
-      <FlashSalesCarousel
-        prevRef={prevRef}
-        nextRef={nextRef}
-        onStateChange={({ isBeginning, isEnd }) => {
-          setIsBeginning(isBeginning);
-          setIsEnd(isEnd);
-        }}
-      />
-
-      <div className="flex justify-center mt-14">
-        <button className="text-white bg-primary py-3 px-8 rounded-md cursor-pointer">View All Products</button>
+      <div className="mt-6 flex justify-center">
+        <CategoryCarousel
+          prevRef={prevRef}
+          nextRef={nextRef}
+          onStateChange={({ isBeginning, isEnd }) => {
+            setIsBeginning(isBeginning);
+            setIsEnd(isEnd);
+          }}
+        />
       </div>
-
-      <div className="border border-gray-200 mt-14" />
     </section>
   );
-}
+};
+
+export default Category;

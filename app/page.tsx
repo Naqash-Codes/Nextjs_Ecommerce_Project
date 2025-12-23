@@ -1,3 +1,4 @@
+import Category from '@/components/homepage/Category'
 import FlashSaleSection from '@/components/homepage/FlashSaleSection'
 import HeroSection from '@/components/homepage/HeroSection'
 
@@ -6,6 +7,7 @@ const HomePage = () => {
     <div>
       <HeroSection />
       <FlashSaleSection />
+      <Category />
     </div>
   )
 }
