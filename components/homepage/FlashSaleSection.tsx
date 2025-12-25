@@ -2,9 +2,9 @@
 
 import { useRef, useState } from "react";
 import CountdownTimer from "../Counter";
-import FlashSalesCarousel from "../FlashSaleCarousel";
 import Heading from "../Heading";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import ProductCarousel from "../ProductsCarousel";
 
 export default function FlashSalesSection() {
   const saleEndDate = new Date();
@@ -21,7 +21,7 @@ export default function FlashSalesSection() {
       <Heading title="Today's" />
 
       {/* Title + Timer + Arrows */}
-      <div className="mt-6 flex items-center justify-between mb-6">
+      <div className="mt-6 flex items-center justify-between mb-10">
         <div className="flex items-center gap-20">
           <h2 className="text-5xl font-semibold">Flash Sales</h2>
           <CountdownTimer targetDate={saleEndDate} />
@@ -58,7 +58,7 @@ export default function FlashSalesSection() {
       </div>
 
       {/* Carousel */}
-      <FlashSalesCarousel
+      <ProductCarousel
         prevRef={prevRef}
         nextRef={nextRef}
         onStateChange={({ isBeginning, isEnd }) => {

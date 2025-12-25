@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useEffect, useState } from "react";
 
@@ -7,39 +7,46 @@ type TimeLeft = {
   hours: number;
   minutes: number;
   seconds: number;
-}
+};
 
 function calculateTimeLeft(targetDate: Date): TimeLeft {
-  const difference = targetDate.getTime() - Date.now()
+  const difference = targetDate.getTime() - Date.now();
 
   if (difference <= 0) {
-    return {days: 0, hours: 0, minutes: 0, seconds: 0}
-  } 
+    return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+  }
 
   return {
     days: Math.floor(difference / (1000 * 60 * 60 * 24)),
     hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
     minutes: Math.floor((difference / (1000 * 60)) % 60),
-    seconds: Math.floor((difference / 1000) % 60)
-  }
+    seconds: Math.floor((difference / 1000) % 60),
+  };
 }
 
-export default function CountdownTimer({
-  targetDate,
-} : {
-  targetDate: Date;
-}) {
-  const [timeLeft, setTimeLeft] = useState<TimeLeft>(
-    calculateTimeLeft(targetDate)
-  )
+export default function CountdownTimer({ targetDate }: { targetDate: Date }) {
+  const [mounted, setMounted] = useState(false);
+  const [timeLeft, setTimeLeft] = useState<TimeLeft>({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
 
+  // ✅ Run only on client AFTER hydration
   useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft(calculateTimeLeft(targetDate))
-    }, 1000)
+    setMounted(true);
+    setTimeLeft(calculateTimeLeft(targetDate));
 
-    return () => clearInterval(timer)
-  }, [targetDate])
+    const timer = setInterval(() => {
+      setTimeLeft(calculateTimeLeft(targetDate));
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [targetDate]);
+
+  // ✅ Prevent SSR/client mismatch
+  if (!mounted) return null;
 
   return (
     <div className="flex items-center gap-3">
@@ -51,13 +58,13 @@ export default function CountdownTimer({
       <div className="mt-5 text-xl font-bold text-primary">:</div>
       <TimeBox label="Seconds" value={timeLeft.seconds} />
     </div>
-  )
+  );
 }
 
 function TimeBox({ label, value }: { label: string; value: number }) {
   return (
     <div className="flex flex-col items-center">
-      <span className="text- text-gray-500">{label}</span>
+      <span className="text-gray-500">{label}</span>
       <span className="text-3xl font-bold">
         {String(value).padStart(2, "0")}
       </span>

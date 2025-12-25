@@ -10,19 +10,24 @@ import Image from "next/image";
 import { RefObject } from "react";
 
 type Props = {
-  prevRef: RefObject<HTMLButtonElement | null>;
-  nextRef: RefObject<HTMLButtonElement | null>;
-  onStateChange: (state: { isBeginning: boolean; isEnd: boolean }) => void;
+  prevRef?: RefObject<HTMLButtonElement | null>;
+  nextRef?: RefObject<HTMLButtonElement | null>;
+  onStateChange?: (state: {
+    isBeginning: boolean;
+    isEnd: boolean;
+  }) => void;
 };
 
-export default function FlashSalesCarousel({
+export default function ProductCarousel({
   prevRef,
   nextRef,
   onStateChange,
 }: Props) {
+  const hasNavigation = !!prevRef && !!nextRef;
+
   return (
     <Swiper
-      modules={[Navigation]}
+      modules={hasNavigation ? [Navigation] : []}
       spaceBetween={16}
       slidesPerView={4}
       watchOverflow
@@ -31,24 +36,31 @@ export default function FlashSalesCarousel({
         640: { slidesPerView: 2 },
         1024: { slidesPerView: 4 },
       }}
-      navigation={{
-        prevEl: prevRef.current,
-        nextEl: nextRef.current,
-      }}
+      navigation={
+        hasNavigation
+          ? {
+              prevEl: prevRef.current,
+              nextEl: nextRef.current,
+            }
+          : false
+      }
       onBeforeInit={(swiper) => {
-        if (typeof swiper.params.navigation !== "boolean") {
+        if (
+          hasNavigation &&
+          typeof swiper.params.navigation !== "boolean"
+        ) {
           swiper.params.navigation!.prevEl = prevRef.current;
           swiper.params.navigation!.nextEl = nextRef.current;
         }
       }}
       onSlideChange={(swiper) => {
-        onStateChange({
+        onStateChange?.({
           isBeginning: swiper.isBeginning,
           isEnd: swiper.isEnd,
         });
       }}
       onInit={(swiper) => {
-        onStateChange({
+        onStateChange?.({
           isBeginning: swiper.isBeginning,
           isEnd: swiper.isEnd,
         });
@@ -95,8 +107,6 @@ export default function FlashSalesCarousel({
                   ${product.actPrice}
                 </span>
               )}
-
-              
             </div>
           </div>
         </SwiperSlide>
