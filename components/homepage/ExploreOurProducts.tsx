@@ -10,8 +10,10 @@ const ExploreOurProducts = () => {
   const [visibleRows, setVisibleRows] = useState(2);
   const visibleProducts = visibleRows * PRODUCTS_PER_ROW;
 
+  const hasMoreProducts = visibleProducts < exploreProductList.length;
+
   return (
-    <section className="px-6 xl:px-24 mt-10">
+    <section className="px-6 xl:px-24 mt-10 mb-10">
       <Heading title="Our Products" />
       <h1 className="text-5xl font-semibold mt-10">Explore Our Products</h1>
 
@@ -61,11 +63,15 @@ const ExploreOurProducts = () => {
       </div>
 
       <div className="mt-6 flex justify-center">
-        <button 
+        {hasMoreProducts ? (
+          <button 
           onClick={() => setVisibleRows((prev) => Math.min(prev + 1, Math.ceil(exploreProductList.length / PRODUCTS_PER_ROW)))}
           className="bg-primary cursor-pointer px-8 py-4 text-white rounded-md ">
-          View All Products
+          View More Products
         </button>
+        ) : (
+          <p className="text-gray-400 text-sm">No more products to show here...</p>
+        )}
       </div>
     </section>
   );
