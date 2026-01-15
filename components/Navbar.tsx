@@ -3,14 +3,14 @@ import NavInput from "./NavInput";
 import Favouritebtn from "./Favouritebtn";
 import Cart from "./Cart";
 import ProfileButton from "./ProfileButton";
+import { User, Handbag, CircleX, Star, LogOut } from 'lucide-react';
 
 const Navbar = async () => {
-
   const navMenu = [
     { name: "Home", href: "/" },
     { name: "Contact", href: "/contact" },
-    { name: "About", href: "/about" },    
-    { name: "Sign Up", href: "/signup" },    
+    { name: "About", href: "/about" },
+    { name: "Sign Up", href: "/signup" },
   ];
 
   return (
@@ -33,7 +33,33 @@ const Navbar = async () => {
         <NavInput />
         <Favouritebtn />
         <Cart />
-        <ProfileButton />
+        <div className="relative">
+          <ProfileButton />
+          <div className="absolute right-0 z-10 mt-1">
+            <ul className="bg-black/40 backdrop-blur-2xl rounded-md py-4 px-6 w-60 text-white space-y-4">
+              <li className="flex items-center gap-2 cursor-pointer">
+                <User />
+                <p>Manage My Account</p>
+              </li>
+              <li className="flex items-center gap-2 cursor-pointer">
+                <Handbag />
+                <p>My Order</p>
+              </li>
+              <li className="flex items-center gap-2 cursor-pointer">
+                <CircleX />
+                <p>My Cancellations</p>
+              </li>
+              <li className="flex items-center gap-2 cursor-pointer">
+                <Star />
+                <p>My Reviews</p>
+              </li>
+              <li className="flex items-center gap-2 cursor-pointer">
+                <LogOut />
+                <p>Logout</p>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </nav>
   );

@@ -9,20 +9,25 @@ import {
 const Footer = () => {
   return (
     <footer className="bg-black text-white px-6 xl:px-24 pt-20">
-      
       {/* TOP GRID */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10">
-
+      <div
+        className="
+          grid
+          grid-cols-1
+          sm:grid-cols-2
+          lg:grid-cols-[1.3fr_1fr_1fr_1fr_1.3fr]
+          gap-10
+        "
+      >
         {/* EXCLUSIVE */}
-        <div>
-          <h2 className="text-xl font-semibold mb-6">Exclusive</h2>
-
-          <p className="font-medium mb-4">Subscribe</p>
-          <p className="text-sm text-gray-400 mb-4">
+        <div className="space-y-4 justify-self-start">
+          <h2 className="text-xl font-semibold">Exclusive</h2>
+          <p className="font-medium">Subscribe</p>
+          <p className="text-sm text-gray-400">
             Get 10% off your first order
           </p>
 
-          <div className="relative w-full max-w-60">
+          <div className="relative">
             <input
               type="email"
               placeholder="Enter your email"
@@ -36,29 +41,25 @@ const Footer = () => {
         </div>
 
         {/* SUPPORT */}
-        <div>
-          <h2 className="text-xl font-semibold mb-6">Support</h2>
-
+        <div className="space-y-4 justify-self-start">
+          <h2 className="text-xl font-semibold">Support</h2>
           <p className="text-sm text-gray-400 leading-7">
             111 Bijoy sarani, Dhaka,
             <br />
             DH 1515, Bangladesh.
           </p>
-
-          <p className="text-sm text-gray-400 mt-4">
+          <p className="text-sm text-gray-400">
             exclusive@gmail.com
           </p>
-
-          <p className="text-sm text-gray-400 mt-2">
+          <p className="text-sm text-gray-400">
             +88015-88888-9999
           </p>
         </div>
 
         {/* ACCOUNT */}
-        <div>
-          <h2 className="text-xl font-semibold mb-6">Account</h2>
-
-          <ul className="space-y-4 text-sm text-gray-400">
+        <div className="space-y-4 justify-self-start">
+          <h2 className="text-xl font-semibold">Account</h2>
+          <ul className="space-y-3 text-sm text-gray-400">
             <li className="hover:text-white cursor-pointer">My Account</li>
             <li className="hover:text-white cursor-pointer">
               Login / Register
@@ -70,10 +71,9 @@ const Footer = () => {
         </div>
 
         {/* QUICK LINK */}
-        <div>
-          <h2 className="text-xl font-semibold mb-6">Quick Link</h2>
-
-          <ul className="space-y-4 text-sm text-gray-400">
+        <div className="space-y-4 justify-self-start">
+          <h2 className="text-xl font-semibold">Quick Link</h2>
+          <ul className="space-y-3 text-sm text-gray-400">
             <li className="hover:text-white cursor-pointer">
               Privacy Policy
             </li>
@@ -86,35 +86,33 @@ const Footer = () => {
         </div>
 
         {/* DOWNLOAD APP */}
-        <div>
-          <h2 className="text-xl font-semibold mb-6">Download App</h2>
-
-          <p className="text-sm text-gray-400 mb-4">
+        <div className="space-y-4 justify-self-start">
+          <h2 className="text-xl font-semibold">Download App</h2>
+          <p className="text-sm text-gray-400">
             Save $3 with App New User Only
           </p>
 
-          <div className="flex gap-4 mb-6">
+          <div className="flex gap-4">
             <img
               src="/images/qr-code.png"
               alt="QR Code"
-              className="w-20 h-20"
+              className="w-20 h-20 object-contain"
             />
-
             <div className="flex flex-col gap-3">
               <img
                 src="/images/google-play.png"
                 alt="Google Play"
-                className="w-28"
+                className="w-28 object-contain"
               />
               <img
-                src="/images/app-store.png"
+                src="/images/apple-store.png"
                 alt="App Store"
-                className="w-28"
+                className="w-28 object-contain"
               />
             </div>
           </div>
 
-          <div className="flex gap-6">
+          <div className="flex gap-6 pt-2">
             <Facebook className="cursor-pointer hover:text-gray-300" />
             <Twitter className="cursor-pointer hover:text-gray-300" />
             <Instagram className="cursor-pointer hover:text-gray-300" />

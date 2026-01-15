@@ -27,7 +27,7 @@ const ProfileButton = () => {
 
   return (
     <button
-      onClick={handleClick}
+      // onClick={handleClick}
       className="flex items-center gap-2 focus:outline-none cursor-pointer"
     >
       {session?.user?.image ? (

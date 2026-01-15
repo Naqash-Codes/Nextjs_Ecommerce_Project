@@ -2,7 +2,7 @@ import { Truck, Headphones, ShieldCheck } from "lucide-react";
 
 const ServiceBanner = () => {
   return (
-    <section className="px-6 xl:px-24 my-20">
+    <section className="px-6 xl:px-24 my-30">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
 
         {/* FREE DELIVERY */}

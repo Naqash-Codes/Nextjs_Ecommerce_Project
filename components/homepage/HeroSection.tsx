@@ -25,6 +25,16 @@ const HeroSection = () => {
               <span className="text-lg">{">"}</span>
             </li>
           ))}
+
+          {/* <li className="flex justify-between items-center cursor-pointer hover:text-black">Woman’s Fashion</li>
+          <li className="flex justify-between items-center cursor-pointer hover:text-black">Men’s Fashion</li>
+          <li className="flex justify-between items-center cursor-pointer hover:text-black">Electronics</li>
+          <li className="flex justify-between items-center cursor-pointer hover:text-black">Home & Lifestyle</li>
+          <li className="flex justify-between items-center cursor-pointer hover:text-black">Medicine</li>
+          <li className="flex justify-between items-center cursor-pointer hover:text-black">Sports & Outdoor</li>
+          <li className="flex justify-between items-center cursor-pointer hover:text-black">Baby’s & Toys</li>
+          <li className="flex justify-between items-center cursor-pointer hover:text-black">Groceries & Pets</li>
+          <li className="flex justify-between items-center cursor-pointer hover:text-black">Health & Beauty</li> */}
         </ul>
       </div>
 
