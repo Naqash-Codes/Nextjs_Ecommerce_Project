@@ -33,10 +33,10 @@ const Navbar = async () => {
         <NavInput />
         <Favouritebtn />
         <Cart />
-        <div className="relative">
+        <div className="relative group">
           <ProfileButton />
-          <div className="absolute right-0 z-10 mt-1">
-            <ul className="bg-black/40 backdrop-blur-2xl rounded-md py-4 px-6 w-60 text-white space-y-4">
+          <div className="absolute right-0 z-10 pt-2 opacity-0 invisible -translate-y-2 transition-all ease-out group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 duration-200">
+            <ul className="bg-black/30 backdrop-blur-2xl rounded-md py-4 px-6 w-60 text-white space-y-4 shadow-md pointer-events-auto">
               <li className="flex items-center gap-2 cursor-pointer">
                 <User />
                 <p>Manage My Account</p>
