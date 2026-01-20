@@ -2,64 +2,165 @@ export const productList = [
   {
     id: 1,
     name: "HAVIT HV-G92 Gamepad",
+    slug: "havit-hv-g92-gamepad",
+    description:
+      "PlayStation-style gamepad with ergonomic grip, vibration feedback, and durable buttons for long gaming sessions.",
     actPrice: 160,
     disPrice: 120,
     disPer: 40,
-    img: "/images/controller.png",
+    rating: 4.8,
+    reviews: 88,
+    stock: 24,
+    category: "Gaming",
+    sku: "HVT-G92",
+    img: [
+      "/images/controller.png",
+      "/images/controller-2.png",
+      "/images/controller-3.png",
+    ],
+    colors: ["black", "red"],
   },
+
   {
     id: 2,
     name: "AK-900 Wired Keyboard",
+    slug: "ak-900-wired-keyboard",
+    description:
+      "Mechanical wired keyboard with RGB backlight, fast response keys, and premium build quality.",
     actPrice: 1160,
-    // disPrice: 960,
-    img: "/images/keyboard.png",
+    rating: 4.5,
+    reviews: 75,
+    stock: 18,
+    category: "Accessories",
+    sku: "AK-900-KB",
+    img: [
+      "/images/keyboard.png",
+      "/images/keyboard-2.png",
+    ],
+    colors: ["black"],
   },
+
   {
     id: 3,
     name: "IPS LCD Gaming Monitor",
+    slug: "ips-lcd-gaming-monitor",
+    description:
+      "24-inch IPS LCD gaming monitor with ultra-smooth refresh rate and vivid color accuracy.",
     actPrice: 400,
     disPrice: 370,
     disPer: 30,
-    img: "/images/monitor.png",
+    rating: 4.7,
+    reviews: 99,
+    stock: 12,
+    category: "Monitors",
+    sku: "IPS-24-GM",
+    img: [
+      "/images/monitor.png",
+      "/images/monitor-2.png",
+    ],
+    colors: ["black"],
   },
+
   {
     id: 4,
     name: "S-Series Comfort Chair",
+    slug: "s-series-comfort-chair",
+    description:
+      "Ergonomic comfort chair designed for long sitting hours with adjustable height and back support.",
     actPrice: 200,
-    // disPrice: 180,
-    img: "/images/chair.png",
+    rating: 4.6,
+    reviews: 65,
+    stock: 10,
+    category: "Furniture",
+    sku: "S-CH-01",
+    img: [
+      "/images/chair.png",
+      "/images/chair-2.png",
+    ],
+    colors: ["gray", "black"],
   },
   {
     id: 5,
     name: "HAVIT HV-G92 Gamepad",
+    slug: "havit-hv-g92-gamepad-pro",
+    description:
+      "PlayStation-style gamepad with ergonomic grip, vibration feedback, and durable buttons for long gaming sessions.",
     actPrice: 160,
     disPrice: 120,
     disPer: 40,
-    img: "/images/controller.png",
+    rating: 4.8,
+    reviews: 88,
+    stock: 24,
+    category: "Gaming",
+    sku: "HVT-G92",
+    img: [
+      "/images/controller.png",
+      "/images/controller-2.png",
+      "/images/controller-3.png",
+    ],
+    colors: ["black", "red"],
   },
+
   {
     id: 6,
     name: "AK-900 Wired Keyboard",
+    slug: "ak-900-wired-keyboard-pro",
+    description:
+      "Mechanical wired keyboard with RGB backlight, fast response keys, and premium build quality.",
     actPrice: 1160,
-    // disPrice: 960,
-    img: "/images/keyboard.png",
+    rating: 4.5,
+    reviews: 75,
+    stock: 18,
+    category: "Accessories",
+    sku: "AK-900-KB",
+    img: [
+      "/images/keyboard.png",
+      "/images/keyboard-2.png",
+    ],
+    colors: ["black"],
   },
+
   {
     id: 7,
     name: "IPS LCD Gaming Monitor",
+    slug: "ips-lcd-gaming-monitor-pro",
+    description:
+      "24-inch IPS LCD gaming monitor with ultra-smooth refresh rate and vivid color accuracy.",
     actPrice: 400,
     disPrice: 370,
     disPer: 30,
-    img: "/images/monitor.png",
+    rating: 4.7,
+    reviews: 99,
+    stock: 12,
+    category: "Monitors",
+    sku: "IPS-24-GM",
+    img: [
+      "/images/monitor.png",
+      "/images/monitor-2.png",
+    ],
+    colors: ["black"],
   },
+
   {
     id: 8,
     name: "S-Series Comfort Chair",
+    slug: "s-series-comfort-chair-pro",
+    description:
+      "Ergonomic comfort chair designed for long sitting hours with adjustable height and back support.",
     actPrice: 200,
-    // disPrice: 180,
-    img: "/images/chair.png",
+    rating: 4.6,
+    reviews: 65,
+    stock: 10,
+    category: "Furniture",
+    sku: "S-CH-01",
+    img: [
+      "/images/chair.png",
+      "/images/chair-2.png",
+    ],
+    colors: ["gray", "black"],
   },
 ];
+
 
 export const exploreProductList = [
   {
