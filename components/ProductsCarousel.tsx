@@ -70,7 +70,7 @@ export default function ProductCarousel({
         <SwiperSlide key={product.id} className="flex justify-center">
           <Link
             href={`/product/${product.slug}`}
-            className="block w-full max-w-[250px] select-none"
+            className="block w-full max-w-[280px] select-none"
           >
             <div className="relative cursor-pointer w-full">
               {/* Discount badge */}

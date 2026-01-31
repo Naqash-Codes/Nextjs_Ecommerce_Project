@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { Star, Heart } from "lucide-react";
 import { useState } from "react";
+import Heading from "@/components/Heading";
+import ProductCarousel from "@/components/ProductsCarousel";
 
 interface Product {
   id: number;
@@ -39,7 +41,7 @@ export default function ProductDetail({ product }: Props) {
   };
 
   return (
-    <section className="px-6 xl:px-24 py-10">
+    <section className="px-6 xl:px-24 py-20">
       <div className="grid grid-cols-2 gap-16">
         {/* LEFT: Main Image */}
         <div className="bg-gray-100 flex items-center justify-center rounded-md">
@@ -167,6 +169,12 @@ export default function ProductDetail({ product }: Props) {
               </p>
             </div>
           </div>
+        </div>
+      </div>
+      <div className="mt-20">
+        <Heading title="Related Items" />
+        <div className="mt-16">
+          <ProductCarousel />
         </div>
       </div>
     </section>
