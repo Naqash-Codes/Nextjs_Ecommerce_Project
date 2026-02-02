@@ -1,4 +1,6 @@
 import AboutCards from "@/components/AboutCards";
+import ServiceBanner from "@/components/homepage/ServiceBanner";
+import Testimonials from "@/components/Testimonial";
 import Image from "next/image";
 import React from "react";
 
@@ -41,7 +43,13 @@ const AboutPage = () => {
         <AboutCards />
       </div>
 
-      
+      <div className="mt-24 mx-20">
+        <Testimonials />
+      </div>
+
+      <div>
+        <ServiceBanner />
+      </div>
     </main>
   );
 };

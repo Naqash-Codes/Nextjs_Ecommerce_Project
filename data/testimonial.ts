@@ -21,4 +21,22 @@ export const testimonials = [
     name: "Will Smith",
     title: "Product Designer",
   },
+  {
+    id: 4,
+    img: img2,
+    name: "Emma Watson",
+    title: "Managing Director",
+  },
+  {
+    id: 5,
+    img: img1,
+    name: "Tom Cruise",
+    title: "Founder & Chairman",
+  },
+  {
+    id: 6,
+    img: img3,
+    name: "Will Smith",
+    title: "Product Designer",
+  },
 ]
