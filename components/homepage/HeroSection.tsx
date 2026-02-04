@@ -2,9 +2,9 @@ import Image from "next/image";
 
 const HeroSection = () => {
   return (
-    <section className="w-full px-6 xl:px-24 flex justify-center items-center gap-4">
+    <section className="w-full px-6 xl:px-24 flex justify-between gap-4">
       {/* LEFT SIDEBAR */}
-      <div className="hidden lg:block w-1/4 bg-white border-gray-300 border-r pr-5 pt-6">
+      <div className="hidden lg:block w-1/5 bg-white border-gray-300 border-r pr-5 pt-6">
         <ul className="space-y-4 text-gray-800 text-[15px] font-medium">
           {[
             "Woman’s Fashion",
@@ -22,19 +22,11 @@ const HeroSection = () => {
               className="flex justify-between items-center cursor-pointer hover:text-black"
             >
               {item}
-              <span className="text-lg">{">"}</span>
+              {(idx === 0 || idx === 1) && (
+                <span className="text-lg">{">"}</span>
+              )}
             </li>
           ))}
-
-          {/* <li className="flex justify-between items-center cursor-pointer hover:text-black">Woman’s Fashion</li>
-          <li className="flex justify-between items-center cursor-pointer hover:text-black">Men’s Fashion</li>
-          <li className="flex justify-between items-center cursor-pointer hover:text-black">Electronics</li>
-          <li className="flex justify-between items-center cursor-pointer hover:text-black">Home & Lifestyle</li>
-          <li className="flex justify-between items-center cursor-pointer hover:text-black">Medicine</li>
-          <li className="flex justify-between items-center cursor-pointer hover:text-black">Sports & Outdoor</li>
-          <li className="flex justify-between items-center cursor-pointer hover:text-black">Baby’s & Toys</li>
-          <li className="flex justify-between items-center cursor-pointer hover:text-black">Groceries & Pets</li>
-          <li className="flex justify-between items-center cursor-pointer hover:text-black">Health & Beauty</li> */}
         </ul>
       </div>
 
@@ -63,7 +55,7 @@ const HeroSection = () => {
           </div>
 
           {/* RIGHT IMAGE */}
-          <div className="relative w-full max-w-[470px] h-[380px] flex items-center justify-center -mr-9">
+          <div className="relative w-full max-w-[470px] h-[380px] flex items-center justify-center -mr-9 mt-16">
             <Image
               src="/images/slider-img_1.png"
               alt="iPhone"
