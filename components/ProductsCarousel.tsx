@@ -30,7 +30,7 @@ export default function ProductCarousel({
   return (
     <Swiper
       modules={hasNavigation ? [Navigation] : []}
-      spaceBetween={16}
+      spaceBetween={32}
       slidesPerView={4}
       watchOverflow
       breakpoints={{
@@ -67,10 +67,10 @@ export default function ProductCarousel({
       className="w-full"
     >
       {productList.map((product) => (
-        <SwiperSlide key={product.id} className="flex justify-center">
+        <SwiperSlide key={product.id} className="flex justify-center items-center">
           <Link
             href={`/product/${product.slug}`}
-            className="block w-full max-w-[280px] select-none"
+            className="block w-full select-none"
           >
             <div className="relative cursor-pointer w-full">
               {/* Discount badge */}
@@ -81,8 +81,8 @@ export default function ProductCarousel({
               )}
 
               {/* Image box */}
-              <div className="bg-[#f5f5f5] aspect-square w-full p-4 flex items-center justify-center rounded-md">
-                <div className="relative w-full h-full">
+              <div className="bg-[#f5f5f5] aspect-square w-full h-[280px] p-4 flex items-center justify-center rounded-md">
+                <div className="relative w-[250px] h-[250px]">
                   <Image
                     src={Array.isArray(product.img) ? product.img[0] : product.img}
                     alt={product.name}
@@ -94,7 +94,7 @@ export default function ProductCarousel({
 
               {/* Product info */}
               <div className="mt-3 space-y-1">
-                <h2 className="font-semibold text-sm">{product.name}</h2>
+                <h2 className="font-semibold text-lg">{product.name}</h2>
 
                 {product.disPrice ? (
                   <div className="flex gap-2 items-center">
