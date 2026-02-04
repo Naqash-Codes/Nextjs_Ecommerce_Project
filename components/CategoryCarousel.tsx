@@ -1,6 +1,6 @@
 "use client";
 
-import { RefObject, useState } from "react";
+import { RefObject } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
@@ -14,12 +14,10 @@ type Props = {
 };
 
 const CategoryCarousel = ({ prevRef, nextRef, onStateChange }: Props) => {
-  const [activeCategory, setActiveCategory] = useState("Camera");
-
   return (
     <Swiper
       modules={[Navigation]}
-      spaceBetween={16}
+      spaceBetween={26}
       slidesPerView={6}
       watchOverflow
       navigation={{
@@ -53,20 +51,21 @@ const CategoryCarousel = ({ prevRef, nextRef, onStateChange }: Props) => {
     >
       {categories.map((item) => {
         const Icon = item.icon;
-        const isActive = activeCategory === item.title;
 
         return (
           <SwiperSlide key={item.id}>
             <div
-              onClick={() => setActiveCategory(item.title)}
-              className={`min-w-[150px] h-[145px] border border-gray-400 rounded-md flex flex-col items-center justify-center gap-4 cursor-pointer transition
-                ${
-                  isActive
-                    ? "bg-red-500 text-white border-red-500"
-                    : "hover:bg-neutral-100"
-                }`}
+              className="
+                min-w-[150px] h-[150px]
+                border border-gray-400 rounded-md
+                flex flex-col items-center justify-center gap-4
+                cursor-pointer transition-colors duration-200
+                hover:bg-red-500
+                hover:text-white
+                hover:border-red-500
+              "
             >
-              <Icon size={32} />
+              <Icon size={50} />
               <p className="font-medium">{item.title}</p>
             </div>
           </SwiperSlide>
