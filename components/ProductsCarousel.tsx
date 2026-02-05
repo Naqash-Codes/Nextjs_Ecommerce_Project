@@ -10,14 +10,13 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 import { productList } from "@/data/products";
+import { Eye, Heart } from "lucide-react";
+import StarRating from "./StarRating";
 
 type Props = {
   prevRef?: RefObject<HTMLButtonElement | null>;
   nextRef?: RefObject<HTMLButtonElement | null>;
-  onStateChange?: (state: {
-    isBeginning: boolean;
-    isEnd: boolean;
-  }) => void;
+  onStateChange?: (state: { isBeginning: boolean; isEnd: boolean }) => void;
 };
 
 export default function ProductCarousel({
@@ -67,12 +66,15 @@ export default function ProductCarousel({
       className="w-full"
     >
       {productList.map((product) => (
-        <SwiperSlide key={product.id} className="flex justify-center items-center">
+        <SwiperSlide
+          key={product.id}
+          className="flex justify-center items-center"
+        >
           <Link
             href={`/product/${product.slug}`}
             className="block w-full select-none"
           >
-            <div className="relative cursor-pointer w-full">
+            <div className="relative cursor-pointer w-full group">
               {/* Discount badge */}
               {product.disPer && (
                 <div className="absolute top-3 left-3 bg-primary py-1 px-3 text-white text-xs rounded-md z-10">
@@ -80,11 +82,26 @@ export default function ProductCarousel({
                 </div>
               )}
 
+              {/* Hover icons */}
+              <div
+                className="absolute top-3 right-3 flex flex-col gap-2 z-10 opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
+              >
+                <button className="w-9 h-9 bg-white rounded-full flex items-center justify-center shadow hover:bg-primary hover:text-white transition cursor-pointer">
+                  <Heart size={18} />
+                </button>
+
+                <button className="w-9 h-9 bg-white rounded-full flex items-center justify-center shadow hover:bg-primary hover:text-white transition cursor-pointer">
+                  <Eye size={18} />
+                </button>
+              </div>
+
               {/* Image box */}
               <div className="bg-[#f5f5f5] aspect-square w-full h-[280px] p-4 flex items-center justify-center rounded-md">
                 <div className="relative w-[250px] h-[250px]">
                   <Image
-                    src={Array.isArray(product.img) ? product.img[0] : product.img}
+                    src={
+                      Array.isArray(product.img) ? product.img[0] : product.img
+                    }
                     alt={product.name}
                     fill
                     className="object-contain"
@@ -110,6 +127,8 @@ export default function ProductCarousel({
                     ${product.actPrice}
                   </span>
                 )}
+
+                <StarRating rating={product.rating} reviews={product.reviews}/>
               </div>
             </div>
           </Link>
