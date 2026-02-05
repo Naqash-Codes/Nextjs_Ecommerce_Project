@@ -1,20 +1,47 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import CountdownTimer from "../Counter";
 import Heading from "../Heading";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import ProductCarousel from "../ProductsCarousel";
 
+const SALE_KEY = "flashSaleEndTime";
+
+function getSaleEndDate(): Date {
+  if (typeof window === "undefined") {
+    return new Date();
+  }
+
+  const saved = localStorage.getItem(SALE_KEY);
+
+  if (saved) {
+    return new Date(saved);
+  }
+
+  // ⏱️ 3 DAYS SALE (change to hours if needed)
+  const endDate = new Date();
+  endDate.setDate(endDate.getDate() + 3);
+
+  localStorage.setItem(SALE_KEY, endDate.toISOString());
+  return endDate;
+}
+
 export default function FlashSalesSection() {
-  const saleEndDate = new Date();
-  saleEndDate.setDate(saleEndDate.getDate() + 3);
+  const [saleEndDate, setSaleEndDate] = useState<Date | null>(null);
 
   const prevRef = useRef<HTMLButtonElement | null>(null);
   const nextRef = useRef<HTMLButtonElement | null>(null);
 
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
+
+  // ✅ Set sale date ONCE on client
+  useEffect(() => {
+    setSaleEndDate(getSaleEndDate());
+  }, []);
+
+  if (!saleEndDate) return null; // avoid hydration issues
 
   return (
     <section className="px-6 xl:px-24 py-10 mt-10">
@@ -68,7 +95,9 @@ export default function FlashSalesSection() {
       />
 
       <div className="flex justify-center mt-14">
-        <button className="text-white bg-primary py-3 px-8 rounded-md cursor-pointer">View All Products</button>
+        <button className="text-white bg-primary py-3 px-8 rounded-md cursor-pointer">
+          View All Products
+        </button>
       </div>
 
       <div className="border border-gray-200 mt-14" />

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import CountdownTimer from "../Counter"
+import SaleCountDownTimer from "../SaleCountDownTimer";
 
 const SaleBannerSection = () => {
   const saleEndDate = new Date();
@@ -8,13 +8,13 @@ const SaleBannerSection = () => {
   return (
     <section className="px-6 xl:px-24 mt-10">
       <div className="bg-black py-16 px-18 flex justify-between items-center">
-        <div className="text-white space-y-6">
+        <div className="text-white space-y-8">
           <h4 className="font-semibold text-lg text-[#00fe66]">Categories</h4>
           <h1 className="text-6xl font-semibold">Enhance Your <br /> Music Experience</h1>
           <div>
-            <CountdownTimer targetDate={saleEndDate} />
+            <SaleCountDownTimer />
           </div>
-          <button className="bg-[#00ff66] py-4 px-8 rounded-md cursor-pointer font-semibold">
+          <button className="bg-[#00ff66] py-4 px-12 rounded-md cursor-pointer font-semibold">
             Buy Now!
           </button>
         </div>
