@@ -1,10 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { Star, Heart } from "lucide-react";
+import { Heart } from "lucide-react";
 import { useState } from "react";
 import Heading from "@/components/Heading";
 import ProductCarousel from "@/components/ProductsCarousel";
+import StarRating from "@/components/StarRating"; // ✅ import your StarRating component
 
 interface Product {
   id: number;
@@ -15,9 +16,9 @@ interface Product {
   disPrice?: number;
   disPer?: number;
   rating: number;
-  reviews: number;
+  reviews?: number;
   stock: number;
-  img: string[]; // array of image URLs
+  img: string;
   colors?: string[];
 }
 
@@ -29,25 +30,21 @@ export default function ProductDetail({ product }: Props) {
   const [quantity, setQuantity] = useState(1);
 
   const increaseQty = () => {
-    if (quantity < product.stock) {
-      setQuantity((prev) => prev + 1);
-    }
+    if (quantity < product.stock) setQuantity((prev) => prev + 1);
   };
 
   const decreaseQty = () => {
-    if (quantity > 1) {
-      setQuantity((prev) => prev - 1);
-    }
+    if (quantity > 1) setQuantity((prev) => prev - 1);
   };
 
   return (
-    <section className="px-6 xl:px-24 py-20">
+    <section className="px-6 xl:px-24 pt-10 pb-20">
       <div className="grid grid-cols-2 gap-16">
         {/* LEFT: Main Image */}
         <div className="bg-gray-100 flex items-center justify-center rounded-md">
           <div className="relative w-[70%] aspect-square">
             <Image
-              src={product.img[0]}
+              src={product.img}
               alt={product.name}
               fill
               className="object-contain"
@@ -56,32 +53,21 @@ export default function ProductDetail({ product }: Props) {
         </div>
 
         {/* RIGHT: Product Info */}
-        <div className="space-y-6 ">
+        <div className="space-y-6">
           {/* Title */}
           <h1 className="text-3xl font-semibold">{product.name}</h1>
 
           {/* Rating + Reviews + Stock */}
           <div className="flex items-center gap-3 text-sm">
-            <div className="flex items-center gap-1 text-yellow-500">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star
-                  key={i}
-                  size={16}
-                  fill={
-                    i < Math.round(product.rating) ? "currentColor" : "none"
-                  }
-                />
-              ))}
-            </div>
-            <span className="text-gray-500">({product.reviews} Reviews)</span>
+            <StarRating rating={product.rating} reviews={product.reviews} />
             <span className="text-green-500">In Stock</span>
           </div>
 
           {/* Price */}
-          <div className="text-2xl font-semibold">
-            ${product.disPrice ?? product.actPrice}
+          <div className="text-2xl font-semibold flex items-end gap-3">
+            <span>${product.disPrice ?? product.actPrice}</span>
             {product.disPrice && (
-              <span className="text-gray-400 line-through text-lg ml-3">
+              <span className="text-gray-400 line-through text-lg">
                 ${product.actPrice}
               </span>
             )}
@@ -171,6 +157,8 @@ export default function ProductDetail({ product }: Props) {
           </div>
         </div>
       </div>
+
+      {/* Related Products */}
       <div className="mt-20">
         <Heading title="Related Items" />
         <div className="mt-16">
