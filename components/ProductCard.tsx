@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Eye, Heart } from "lucide-react";
 import StarRating from "./StarRating";
+import { useCart } from "@/context/CartContext";
 
 type Product = {
   id: number;
@@ -15,6 +16,7 @@ type Product = {
   disPer?: number;
   rating: number;
   reviews?: number;
+  stock: number;
 };
 
 type ProductCardProps = {
@@ -22,6 +24,25 @@ type ProductCardProps = {
 };
 
 const ProductCard = ({ product }: ProductCardProps) => {
+  const { addToCart, getItemQuantity } = useCart();
+
+  const currentQty = getItemQuantity(product.id);
+  const isOutOfStock = product.stock === 0;
+  const isAlreadyAdded = currentQty > 0; // ✅ changed logic
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault();
+
+    if (isOutOfStock || isAlreadyAdded) return;
+
+    addToCart(product);
+  };
+
+  const finalPrice = product.disPrice ?? product.actPrice;
+  const imageSrc = Array.isArray(product.img)
+    ? product.img[0]
+    : product.img;
+
   return (
     <Link
       href={`/product/${product.slug}`}
@@ -52,11 +73,11 @@ const ProductCard = ({ product }: ProductCardProps) => {
           </button>
         </div>
 
-        {/* Image + Hover Add To Cart */}
+        {/* Image Section */}
         <div className="relative overflow-hidden bg-[#f5f5f5] aspect-square w-full h-[280px] p-4 flex items-center justify-center rounded-md">
           <div className="relative w-[220px] h-[220px]">
             <Image
-              src={Array.isArray(product.img) ? product.img[0] : product.img}
+              src={imageSrc}
               alt={product.name}
               fill
               className="object-contain"
@@ -65,16 +86,26 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
           {/* Add To Cart Button */}
           <button
-            onClick={(e) => e.preventDefault()}
-            className="
+            onClick={handleAddToCart}
+            disabled={isOutOfStock || isAlreadyAdded}
+            className={`
               absolute bottom-0 left-0 w-full
-              bg-black text-white py-3 text-sm font-medium
-              translate-y-full
-              group-hover:translate-y-0
+              py-3 text-sm font-medium
               transition-transform duration-300 ease-out
-            "
+              ${
+                isOutOfStock
+                  ? "bg-gray-400 cursor-not-allowed translate-y-0"
+                  : isAlreadyAdded
+                  ? "bg-green-600 text-white translate-y-0 cursor-not-allowed"
+                  : "bg-black text-white translate-y-full cursor-pointer group-hover:translate-y-0"
+              }
+            `}
           >
-            Add To Cart
+            {isOutOfStock
+              ? "Out of Stock"
+              : isAlreadyAdded
+              ? "Added"
+              : "Add To Cart"}
           </button>
         </div>
 
@@ -85,7 +116,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           {product.disPrice ? (
             <div className="flex gap-2 items-center">
               <span className="text-primary font-semibold">
-                ${product.disPrice}
+                ${finalPrice}
               </span>
               <span className="line-through text-[#808080] text-sm">
                 ${product.actPrice}
@@ -93,7 +124,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
             </div>
           ) : (
             <span className="text-primary font-semibold">
-              ${product.actPrice}
+              ${finalPrice}
             </span>
           )}
 

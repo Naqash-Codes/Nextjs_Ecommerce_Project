@@ -1,46 +1,18 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { X, ChevronUp, ChevronDown } from "lucide-react";
-import { productList } from "@/data/products";
+import { useCart } from "@/context/CartContext";
 
 const Cart = () => {
-  const [cartItems, setCartItems] = useState([
-    {
-      ...productList[0],
-      quantity: 1,
-    },
-    {
-      ...productList[2],
-      quantity: 2,
-    },
-  ]);
+  const {
+    cartItems,
+    increaseQty,
+    decreaseQty,
+    removeItem,
+  } = useCart();
 
-  // Increase quantity
-  const increaseQty = (id: number) => {
-    setCartItems((prev) =>
-      prev.map((item) =>
-        item.id === id
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
-      )
-    );
-  };
-
-  // Decrease quantity
-  const decreaseQty = (id: number) => {
-    setCartItems((prev) =>
-      prev.map((item) =>
-        item.id === id && item.quantity > 1
-          ? { ...item, quantity: item.quantity - 1 }
-          : item
-      )
-    );
-  };
-
-  // Calculate subtotal
   const subtotal = cartItems.reduce((acc, item) => {
     const price = item.disPrice ?? item.actPrice;
     return acc + price * item.quantity;
@@ -48,8 +20,8 @@ const Cart = () => {
 
   return (
     <section className="max-w-6xl mx-auto px-6 py-16">
-      {/* Header Row */}
-      <div className="hidden md:grid grid-cols-4 px-8 py-4 mb-6 text-lg font-medium text-gray-700 border-b border-gray-200">
+      {/* Header */}
+      <div className="hidden md:grid grid-cols-4 px-8 py-4 text-lg font-medium text-gray-700 border-b border-gray-200">
         <div>Product</div>
         <div>Price</div>
         <div>Quantity</div>
@@ -58,9 +30,18 @@ const Cart = () => {
 
       {/* Cart Items */}
       <div className="space-y-6">
+        {cartItems.length === 0 && (
+          <p className="text-center mt-6 text-gray-500">
+            Your cart is empty.
+          </p>
+        )}
+
         {cartItems.map((item) => {
           const price = item.disPrice ?? item.actPrice;
           const itemSubtotal = price * item.quantity;
+          const imageSrc = Array.isArray(item.img)
+            ? item.img[0]
+            : item.img;
 
           return (
             <div
@@ -69,12 +50,15 @@ const Cart = () => {
             >
               {/* Product */}
               <div className="flex items-center gap-4 relative">
-                <button className="absolute -top-2 -left-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition">
+                <button
+                  onClick={() => removeItem(item.id)}
+                  className="absolute -top-2 -left-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition"
+                >
                   <X size={14} />
                 </button>
 
                 <Image
-                  src={item.img}
+                  src={imageSrc}
                   alt={item.name}
                   width={80}
                   height={80}
@@ -83,7 +67,9 @@ const Cart = () => {
 
                 <div>
                   <p className="font-medium">{item.name}</p>
-                  <p className="text-sm text-gray-500">{item.category}</p>
+                  <p className="text-xs mt-1 text-gray-400">
+                    In Stock: {item.stock}
+                  </p>
                 </div>
               </div>
 
@@ -97,7 +83,7 @@ const Cart = () => {
                 )}
               </div>
 
-              {/* Quantity With Arrows */}
+              {/* Quantity */}
               <div>
                 <div className="flex items-center border rounded-md w-fit">
                   <div className="px-4 py-2 font-medium">
@@ -107,14 +93,19 @@ const Cart = () => {
                   <div className="flex flex-col border-l">
                     <button
                       onClick={() => increaseQty(item.id)}
-                      className="px-2 py-1 hover:bg-gray-100 rounded-t-md transition"
+                      disabled={item.quantity >= item.stock}
+                      className={`px-2 py-1 transition ${
+                        item.quantity >= item.stock
+                          ? "opacity-40 cursor-not-allowed"
+                          : "hover:bg-gray-100"
+                      }`}
                     >
                       <ChevronUp size={16} />
                     </button>
 
                     <button
                       onClick={() => decreaseQty(item.id)}
-                      className="px-2 py-1 border-t hover:bg-gray-100 rounded-b-md transition"
+                      className="px-2 py-1 border-t hover:bg-gray-100 transition"
                     >
                       <ChevronDown size={16} />
                     </button>
@@ -131,37 +122,19 @@ const Cart = () => {
         })}
       </div>
 
-      {/* Return + Update Buttons */}
-      <div className="flex flex-col md:flex-row justify-between mt-12 gap-6">
+      {/* Return Button */}
+      <div className="flex justify-between mt-12">
         <Link
           href="/"
-          className="border px-8 py-3 rounded-md hover:bg-black hover:text-white transition text-center"
+          className="border px-8 py-3 rounded-md hover:bg-black hover:text-white transition"
         >
           Return To Shop
         </Link>
-
-        <button className="border px-8 py-3 rounded-md hover:bg-black hover:text-white transition">
-          Update Cart
-        </button>
       </div>
 
-      {/* Bottom Section */}
-      <div className="mt-20 grid md:grid-cols-2 gap-12">
-        {/* Coupon */}
-        <div className="flex flex-col sm:flex-row items-start gap-4 max-w-md">
-          <input
-            type="text"
-            placeholder="Coupon Code"
-            className="flex-1 border rounded-md px-5 py-3 outline-none focus:ring-2 focus:ring-black"
-          />
-
-          <button className="bg-primary text-white px-6 py-3 rounded-md hover:bg-red-600 transition whitespace-nowrap cursor-pointer">
-            Apply Coupon
-          </button>
-        </div>
-
-        {/* Cart Total */}
-        <div className="border rounded-md p-8 h-fit">
+      {/* Cart Total */}
+      {cartItems.length > 0 && (
+        <div className="mt-20 border rounded-md p-8 max-w-md ml-auto">
           <h2 className="text-xl font-semibold mb-6">Cart Total</h2>
 
           <div className="flex justify-between mb-4">
@@ -171,23 +144,16 @@ const Cart = () => {
 
           <div className="border-t my-4"></div>
 
-          <div className="flex justify-between mb-4">
-            <span>Shipping:</span>
-            <span>Free</span>
-          </div>
-
-          <div className="border-t my-4"></div>
-
           <div className="flex justify-between font-semibold text-lg mb-6">
             <span>Total:</span>
             <span>${subtotal}</span>
           </div>
 
-          <button className="w-full bg-primary cursor-pointer text-white py-3 rounded-md hover:bg-red-600 transition">
+          <button className="w-full bg-primary text-white py-3 rounded-md hover:bg-red-600 transition">
             Proceed to checkout
           </button>
         </div>
-      </div>
+      )}
     </section>
   );
 };

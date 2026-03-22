@@ -4,6 +4,7 @@ import Favouritebtn from "./Favouritebtn";
 import Cart from "./Cart";
 import ProfileButton from "./ProfileButton";
 import { User, Handbag, CircleX, Star, LogOut } from 'lucide-react';
+import CartWrapper from "./CartWrapper";
 
 const Navbar = async () => {
   const navMenu = [
@@ -12,6 +13,7 @@ const Navbar = async () => {
     { name: "About", href: "/about" },
     { name: "Sign Up", href: "/signup" },
   ];
+
 
   return (
     <nav className="flex justify-between items-center px-6 xl:px-24 py-3 border-b border-gray-300">
@@ -32,7 +34,7 @@ const Navbar = async () => {
       <div className="flex justify-center gap-6 items-center">
         <NavInput />
         <Favouritebtn />
-        <Cart />
+        <CartWrapper />
         <div className="relative group">
           <ProfileButton />
           <div className="absolute right-0 z-10 pt-2 opacity-0 invisible -translate-y-2 transition-all ease-out group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 duration-200">
