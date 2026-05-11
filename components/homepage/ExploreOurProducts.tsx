@@ -28,7 +28,7 @@ const ExploreOurProducts = () => {
       </div>
 
       <div className="mt-16 flex justify-center">
-        {hasMoreProducts ? (
+        {hasMoreProducts &&
           <button
             onClick={() =>
               setVisibleRows((prev) => prev + 1)
@@ -37,11 +37,7 @@ const ExploreOurProducts = () => {
           >
             View More Products
           </button>
-        ) : (
-          <p className="text-gray-400 text-sm">
-            No more products to show here...
-          </p>
-        )}
+        }
       </div>
     </section>
   );
