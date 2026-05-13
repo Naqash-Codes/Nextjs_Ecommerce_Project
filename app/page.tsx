@@ -10,14 +10,14 @@ import ServiceBanner from '@/components/homepage/ServiceBanner'
 const HomePage = () => {
   return (
     <div>
-      <HeroSection />
-      <FlashSaleSection />
+      {/* <HeroSection /> */}
+      {/* <FlashSaleSection />
       <Category />
       <BestSellingSection />
       <SaleBannerSection />
       <ExploreOurProducts />
       <NewArrivalsSection />
-      <ServiceBanner />
+      <ServiceBanner /> */}
     </div>
   )
 }
